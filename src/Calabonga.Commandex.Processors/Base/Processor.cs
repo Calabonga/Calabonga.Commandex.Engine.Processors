@@ -24,6 +24,7 @@ public class Processor : IProcessor
         var ext = Path.GetExtension(result.FileName);
         var saveFileDialog = new SaveFileDialog
         {
+            FileName = result.FileName,
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
             Filter = $"Commandex file *{ext}|*{ext}"
         };

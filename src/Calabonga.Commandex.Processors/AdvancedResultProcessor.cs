@@ -1,8 +1,10 @@
 ﻿using Calabonga.Commandex.Engine.Base;
 using Calabonga.Commandex.Engine.Dialogs;
+using Calabonga.Commandex.Engine.Extensions;
 using Calabonga.Commandex.Engine.Processors.Base;
 using Microsoft.Extensions.Logging;
 using System.Text;
+using System.Text.Json;
 
 namespace Calabonga.Commandex.Engine.Processors;
 
@@ -27,7 +29,7 @@ public class AdvancedResultProcessor : IResultProcessor
 
     public void ProcessCommand(ICommandexCommand command)
     {
-        if (command.GetResult() is not IProcessorResult result)
+        if (command.GetResult() is not IProcessorResult processorResult)
         {
             _logger.LogInformation("Commandex command type {CommandType} processing skipped. Using a DefaultResultProcessor.", command.TypeName);
 
@@ -41,14 +43,24 @@ public class AdvancedResultProcessor : IResultProcessor
 
             if (command.IsPushToShellEnabled)
             {
-                var res = command.GetResult();
-                if (res is null)
+                var result = command.GetResult();
+                if (result is null)
                 {
                     stringBuilder.Append("Result is null.");
                 }
                 else
                 {
-                    stringBuilder.Append(res);
+                    try
+                    {
+                        var data = JsonSerializer.Serialize(result, JsonSerializerOptionsExt.Cyrillic);
+                        stringBuilder.Append(data);
+
+                    }
+                    catch (Exception exception)
+                    {
+                        _dialogService.ShowError(exception.Message);
+                        throw;
+                    }
                 }
             }
 
@@ -60,7 +72,7 @@ public class AdvancedResultProcessor : IResultProcessor
             return;
         }
 
-        result.Accept(_processor);
+        processorResult.Accept(_processor);
         _logger.LogInformation("Commandex command type {CommandType} processing completed.", command.TypeName);
     }
 }
