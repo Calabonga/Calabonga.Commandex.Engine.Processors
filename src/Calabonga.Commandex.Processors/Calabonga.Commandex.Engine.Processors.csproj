@@ -13,8 +13,8 @@
 		<Description>Results Processors for Calabonga.Commandex commands execution results. This is an extended version of the just show string in the notification dialog.</Description>
 		<Copyright>Calabonga SOFT © 2001 - $([System.DateTime]::Now.ToString(yyyy))</Copyright>
 		<PackageTags>commandex;calabonga;wpf;appdefinitions;engine;core;plugins;mvvm;communitytoolkit;processors</PackageTags>
-		<PackageReleaseNotes>First beta</PackageReleaseNotes>
-		<PackageProjectUrl>https://github.com/Calabonga/Calabonga.Commandex.Engine</PackageProjectUrl>
+		<PackageReleaseNotes>First beta released</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/Calabonga/Calabonga.Commandex.Engine.Processors</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Calabonga/Calabonga.Commandex.Engine.Processors</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageIcon>logo.png</PackageIcon>
@@ -23,17 +23,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Calabonga.Commandex.Engine" Version="1.2.0-beta.1" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="..\..\README.md">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="Calabonga.Commandex.Engine" Version="1.2.0-beta.1" />
-	</ItemGroup>
-
-
 
 	<ItemGroup>
 	  <None Update="logo.png">
