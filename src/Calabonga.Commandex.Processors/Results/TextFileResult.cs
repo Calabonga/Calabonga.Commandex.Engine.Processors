@@ -9,7 +9,7 @@ public sealed class TextFileResult : ProcessorResult, IProcessorResult
 {
     public TextFileResult(string fileName, string text)
     {
-        FileName = fileName.EndsWith(".txt") ? fileName : $"{FileName}.txt";
+        FileName = fileName.EndsWith(".txt") ? fileName : $"{fileName}.txt";
         Text = text;
     }
 
