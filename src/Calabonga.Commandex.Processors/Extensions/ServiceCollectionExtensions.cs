@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Calabonga.Commandex.Engine.Processors.Extensions;
 
+/// <summary>
+/// Extension from Dependency Injection container
+/// </summary>
 public static class ServiceCollectionExtensions
 {
     /// <summary>
