@@ -21,6 +21,13 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### v1.3.0 2024-10-12
+
+* ENGINE: The `SettingsPath` parameter was created to allow you to store the command's settings env-files in a separate folder
+* ENGINE: Summaries for some members were updated
+* Summaries updated for some members
+* Nuget package versions Engine and current nuget was synchronized
+
 ### v1.0.0 2024-10-09
 
 * First beta with `TextFileResult` and `ClipboardResult` processors created.
