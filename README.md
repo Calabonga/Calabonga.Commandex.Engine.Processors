@@ -21,7 +21,7 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
-### v1.4.0 2024-11-01
+### v1.4.1 2024-11-01
 
 * Nuget-package versions `Calabonga.Commandex.Engine` updated where new ConfirnationDialog added.
 
