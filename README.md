@@ -21,6 +21,10 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### v1.4.0 2024-11-01
+
+* Nuget-package versions `Calabonga.Commandex.Engine` updated where new ConfirnationDialog added.
+
 ### v1.3.0 2024-10-12
 
 * ENGINE: The `SettingsPath` parameter was created to allow you to store the command's settings env-files in a separate folder
