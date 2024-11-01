@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Calabonga.Utils.Extensions" Version="1.0.0" />
+	  <PackageReference Include="Calabonga.Commandex.Engine" Version="1.4.1" />
 	</ItemGroup>
 
 	<ItemGroup>
