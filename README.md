@@ -21,6 +21,11 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+## v2.0.0-beta.1
+
+* Migration to NET9
+* Nuget package `Calabonga.Commandex.Engine` updated NET9
+
 ## v1.4.2 2024-11-05
 
 * * Nuget-package versions `Calabonga.Commandex.Engine` updated where new ConfirnationDialog added (Func too).
