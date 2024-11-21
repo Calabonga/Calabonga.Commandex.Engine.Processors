@@ -2,6 +2,7 @@
 using Calabonga.Commandex.Engine.Processors.Results;
 using Microsoft.Win32;
 using System.IO;
+using System.Text;
 using System.Windows;
 
 namespace Calabonga.Commandex.Engine.Processors.Base;
@@ -41,7 +42,13 @@ public class Processor : IProcessor
     /// <param name="result"></param>
     public void Visit(ClipboardResult result)
     {
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine("===================================");
+        stringBuilder.AppendLine("          DATA in Clipboard:");
+        stringBuilder.AppendLine("===================================");
+        stringBuilder.AppendLine(result.ClipboardData);
+        var text = stringBuilder.ToString();
         Clipboard.SetText(result.ClipboardData);
-        _dialogService.ShowNotification("Copied");
+        _dialogService.ShowNotification(text);
     }
 }
