@@ -21,7 +21,11 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
-## v2.0.0-beta.1
+## 2.0.1 2024-11-21
+
+* More info shown on `ClipboardResult` processing competed.
+
+## v2.0.0 2024-11-10
 
 * Migration to NET9
 * Nuget package `Calabonga.Commandex.Engine` updated NET9
