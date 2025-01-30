@@ -21,6 +21,10 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+## 2.1.0 2025-01-30
+
+* Identity abstraction added (Engine package)
+
 ## 2.0.1 2024-11-21
 
 * More info shown on `ClipboardResult` processing competed.
