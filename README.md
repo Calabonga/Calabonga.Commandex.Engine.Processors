@@ -21,20 +21,25 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
-## 2.1.0 2025-01-30
+### v2.2.0 2025-04-15
+
+* **Engine nuget**: Open dialog in the window maximized now available. See the override for DialogResult `IsMaximized`
+* Some refactoring made, syntax error fixed. 
+
+### v2.1.0 2025-01-30
 
 * Identity abstraction added (Engine package)
 
-## 2.0.1 2024-11-21
+### v2.0.1 2024-11-21
 
 * More info shown on `ClipboardResult` processing competed.
 
-## v2.0.0 2024-11-10
+### v2.0.0 2024-11-10
 
 * Migration to NET9
 * Nuget package `Calabonga.Commandex.Engine` updated NET9
 
-## v1.4.2 2024-11-05
+### v1.4.2 2024-11-05
 
 * * Nuget-package versions `Calabonga.Commandex.Engine` updated where new ConfirnationDialog added (Func too).
 
