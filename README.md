@@ -21,6 +21,35 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### v2.3.0 2025-06-18
+
+Main dependency [Calabonga.Commandex.Engine](https://github.com/Calabonga/Calabonga.Commandex.Engine) was updated. There are changes. `ViewModelLocationProvider` and `ViewModelLocation` created for Views and ViewModels binding automation. If you want to use `AutoBindingViewModel` on the View (XAML), something like shown below:
+
+```diff
+<UserControl x:Class="Commandex.MyDemoCommand.Views.MyDemoView"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:Commandex.MyDemoCommand.Views"
+            xmlns:viewModels="clr-namespace:Commandex.MyDemoCommand.ViewModels"
++           xmlns:viewModelLocator="clr-namespace:Calabonga.Commandex.Engine.ViewModelLocator;assembly=Calabonga.Commandex.Engine"
++           viewModelLocator:ViewModelLocator.AutoBindingViewModel="True"
+            mc:Ignorable="d" 
+            d:DesignHeight="450" d:DesignWidth="800">
+```
+
+Than you should initialize `ViewModelLocationProvider` in your Shell project in the `Composition Root` of your Application. For example:
+
+```csharp
+var buildServiceProvider = services.BuildServiceProvider();
+ViewModelLocationProvider.SetDefaultViewModelFactory(type => buildServiceProvider.GetRequiredService(type));
+return buildServiceProvider;
+```
+
+You should also follow the naming rules for Views and ViewModels (or create your own overrides). What's the rule? Everything is simple. For example, if your have a view with name **PersonProfileView.xaml** than you should create a ViewModel for it with name **PersonProfileViewModel**.
+
+
 ### v2.2.0 2025-04-15
 
 * **Engine nuget**: Open dialog in the window maximized now available. See the override for DialogResult `IsMaximized`
