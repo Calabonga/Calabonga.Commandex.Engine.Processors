@@ -21,6 +21,45 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### v2.4.0 2025-06-28
+
+`Calabonga.Commandex.Engine` nuget-package updated where a Toast Notification were implemented: Success, Information, Warning, Error. How it works? It's really easy.
+1. Inject `INotificationManager` into your ViewModel constructor:
+    ```csharp
+    public partial class MainWindowsViewModel : ViewModelBase, IDisposable
+    {
+        private readonly INotificationManager _notificationManager;
+        
+        public MainWindowsViewModel(INotificationManager notificationManager)
+        {
+            _notificationManager = notificationManager;
+        }
+        
+        // ... other code...
+    }
+    ```
+2. Create a toast message:
+    ```csharp
+        var errorToast = NotificationManager.CreateErrorToast("Message text", "Title");
+        //  or
+        var successToast = NotificationManager.CreateSuccessToast("Message text", "Title");
+        // or 
+        var warningToast = NotificationManager.CreateWarningToast("Message text", "Title");
+        // or 
+        var informationToast = NotificationManager.CreateInformationToast("Message text", "Title");
+    ```
+3. The show a toast:
+    ```csharp
+     _notificationManager.Show(errorToast);
+     // or
+     _notificationManager.Show(successToast);
+     // or
+     _notificationManager.Show(warningToast);
+     // or
+     _notificationManager.Show(informationToast);
+    ```
+4. Ypu can find any other options for show toast.
+
 ### v2.3.0 2025-06-18
 
 Main dependency [Calabonga.Commandex.Engine](https://github.com/Calabonga/Calabonga.Commandex.Engine) was updated. There are changes. `ViewModelLocationProvider` and `ViewModelLocation` created for Views and ViewModels binding automation. If you want to use `AutoBindingViewModel` on the View (XAML), something like shown below:
