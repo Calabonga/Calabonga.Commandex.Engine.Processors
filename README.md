@@ -21,9 +21,9 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
-### v2.6.0 2025-07-02
+### v2.6.0 2025-07-04
 
-* Engine dependency updated
+* `Calabonga.Commandex.Engine` package updated
 * Result not shown in UI when parameter `IsPushToShellEnabled` is `false`. Only logger save results in this case.
 
 ### v2.5.0 2025-06-29
