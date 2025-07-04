@@ -3,7 +3,6 @@ using Calabonga.Commandex.Engine.Dialogs;
 using Calabonga.Commandex.Engine.Extensions;
 using Calabonga.Commandex.Engine.Processors.Base;
 using Microsoft.Extensions.Logging;
-using System.Text;
 using System.Text.Json;
 
 namespace Calabonga.Commandex.Engine.Processors;
@@ -31,29 +30,26 @@ public class AdvancedResultProcessor : IResultProcessor
     {
         if (command.GetResult() is not IProcessorResult processorResult)
         {
-            _logger.LogInformation("Commandex command type {CommandType} processing skipped. Using a DefaultResultProcessor.", command.TypeName);
+            _logger.LogInformation("[RESULT PROCESSOR] Commandex command type {CommandType} processing skipped. Using a {defaultProcessor}", command.TypeName, nameof(ProcessorResult));
 
             var pushState = command.IsPushToShellEnabled ? "Enabled" : "Disabled";
-            var stringBuilder = new StringBuilder($"{command.DisplayName} v.{command.Version}");
-            stringBuilder.AppendLine();
-            stringBuilder.AppendLine(command.Description);
-            stringBuilder.AppendLine();
-            stringBuilder.AppendLine($"{nameof(command.IsPushToShellEnabled)} is {pushState}");
-            stringBuilder.AppendLine();
+            _logger.LogInformation("[RESULT PROCESSOR] {DisplayName} v.{Version}", command.DisplayName, command.Version);
+            _logger.LogInformation("[RESULT PROCESSOR] {Description}", command.Description);
+            _logger.LogInformation("[RESULT PROCESSOR] IsPushToShellEnabled: {PushState}", pushState);
 
             if (command.IsPushToShellEnabled)
             {
                 var result = command.GetResult();
                 if (result is null)
                 {
-                    stringBuilder.Append("Result is null.");
+                    _logger.LogInformation("[RESULT PROCESSOR] Result is NULL.");
                 }
                 else
                 {
                     try
                     {
                         var data = JsonSerializer.Serialize(result, JsonSerializerOptionsExt.Cyrillic);
-                        stringBuilder.Append(data);
+                        _logger.LogInformation("[RESULT PROCESSOR] {Data}", data);
 
                     }
                     catch (Exception exception)
@@ -63,16 +59,11 @@ public class AdvancedResultProcessor : IResultProcessor
                     }
                 }
             }
-
-            stringBuilder.AppendLine();
-            stringBuilder.AppendLine();
-            stringBuilder.AppendLine("Command execution successfully completed.");
-
-            _dialogService.ShowNotification(stringBuilder.ToString());
+            _logger.LogInformation("[RESULT PROCESSOR] Command execute successfully completed.");
             return;
         }
 
         processorResult.Accept(_processor);
-        _logger.LogInformation("Commandex command type {CommandType} processing completed.", command.TypeName);
+        _logger.LogInformation("[RESULT PROCESSOR] Commandex command type {CommandType} processing completed.", command.TypeName);
     }
 }

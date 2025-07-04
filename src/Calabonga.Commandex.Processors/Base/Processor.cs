@@ -1,8 +1,6 @@
-﻿using Calabonga.Commandex.Engine.Dialogs;
-using Calabonga.Commandex.Engine.Processors.Results;
+﻿using Calabonga.Commandex.Engine.Processors.Results;
 using Microsoft.Win32;
 using System.IO;
-using System.Text;
 using System.Windows;
 
 namespace Calabonga.Commandex.Engine.Processors.Base;
@@ -12,10 +10,6 @@ namespace Calabonga.Commandex.Engine.Processors.Base;
 /// </summary>
 public class Processor : IProcessor
 {
-    private readonly IDialogService _dialogService;
-
-    public Processor(IDialogService dialogService) => _dialogService = dialogService;
-
     /// <summary>
     /// Process <see cref="TextFileResult"/>
     /// </summary>
@@ -40,15 +34,5 @@ public class Processor : IProcessor
     /// Process <see cref="ClipboardResult"/>
     /// </summary>
     /// <param name="result"></param>
-    public void Visit(ClipboardResult result)
-    {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("===================================");
-        stringBuilder.AppendLine("          DATA in Clipboard:");
-        stringBuilder.AppendLine("===================================");
-        stringBuilder.AppendLine(result.ClipboardData);
-        var text = stringBuilder.ToString();
-        Clipboard.SetText(result.ClipboardData);
-        _dialogService.ShowNotification(text);
-    }
+    public void Visit(ClipboardResult result) => Clipboard.SetText(result.ClipboardData);
 }

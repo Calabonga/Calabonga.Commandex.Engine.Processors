@@ -21,6 +21,11 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### v2.6.0 2025-07-04
+
+* `Calabonga.Commandex.Engine` package updated
+* Result not shown in UI when parameter `IsPushToShellEnabled` is `false`. Only logger save results in this case.
+
 ### v2.5.0 2025-06-29
 
 [Toast Notifications](https://github.com/Calabonga/Calabonga.Commandex.Engine/wiki/Toast-Notifications) added into a [Calabonga.Commandex.Engine](https://github.com/Calabonga/Calabonga.Commandex.Engine). Please use [How To Toast Notifications](https://github.com/Calabonga/Calabonga.Commandex.Engine/wiki/Toast-Notifications) on the Engine repository.
