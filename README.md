@@ -22,7 +22,11 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
-### v2.7.0 2025-07-08
+### v2.8.0 2025-07-08
+
+* `Calabonga.Commandex.Engine` package updated
+
+### v2.7.0 2025-07-07
 
 * `Calabonga.Commandex.Engine` package updated
 
