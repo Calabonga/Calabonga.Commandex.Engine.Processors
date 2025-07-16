@@ -7,7 +7,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Calabonga.Commandex.Engine.Processors</Title>
 		<PackageId>Calabonga.Commandex.Engine.Processors</PackageId>
-		<Version>2.8.1</Version>
+		<Version>3.0.0-beta.1</Version>
 		<Authors>Calabonga</Authors>
 		<Company>Calabonga SOFT</Company>
 		<Description>Results Processors for Calabonga.Commandex commands execution results. This is an extended version of the just show string in the notification dialog.</Description>
@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Calabonga.Commandex.Engine" Version="2.8.1" />
+	  <PackageReference Include="Calabonga.Commandex.Engine" Version="3.0.0-beta.1" />
 	</ItemGroup>
 
 	<ItemGroup>
