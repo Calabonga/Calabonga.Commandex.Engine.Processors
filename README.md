@@ -22,6 +22,11 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### v4.0.0 2025-12-05
+
+* Migration to NET10
+* Engine nuget dependency updated.
+
 ### v3.0.0 2025-07-18
 
 * `Calabonga.Commandex.Engine` package updated. New type of the `CommandexCommand` added. `ZoneCommandexCommand<TView,TViewModel>` can be shown in a `Shell` Window in the special `ContentControl` marked as `MainZone`.
