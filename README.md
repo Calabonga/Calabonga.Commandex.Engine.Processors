@@ -22,6 +22,18 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### 5.0.0 2026-06-19
+
+* `IDialogWindow` abstraction added in `Calabonga.Commandex.Engine` nuget for dialog window customization. If you need to use custom window dialog, you should create windows, for example, `CustomDialogWindow` and register it in dependency container.
+
+  ```csharp
+  // something like this
+   services.AddScoped<IDialogWindow, CustomDialogWindow>();
+  ```
+
+
+* Nuget-packages dependencies were updated
+
 ### v4.0.0 2025-12-05
 
 * Migration to NET10
