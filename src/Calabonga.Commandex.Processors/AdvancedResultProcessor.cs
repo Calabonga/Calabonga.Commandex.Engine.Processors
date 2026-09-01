@@ -10,7 +10,7 @@ namespace Calabonga.Commandex.Engine.Processors;
 /// <summary>
 /// Implementation for <see cref="IResultProcessor"/> with some advanced features for result processing
 /// </summary>
-public class AdvancedResultProcessor : IResultProcessor
+public sealed class AdvancedResultProcessor : IResultProcessor
 {
     private readonly IDialogService _dialogService;
     private readonly IProcessor _processor;

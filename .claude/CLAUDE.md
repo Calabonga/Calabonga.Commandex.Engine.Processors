@@ -84,9 +84,3 @@ source.TryAddScoped<IResultProcessor, AdvancedResultProcessor>();
 ```
 
 `TryAdd` — чтобы не перетереть `IResultProcessor`, уже зарегистрированный в `Shell` (там же закомментирован альтернативный `AddResultProcessor<DefaultResultProcessor>()`).
-
-## Известные проблемы
-
-- **Имя папки проекта ≠ имя проекта.** Папка на диске — `src/Calabonga.Commandex.Processors/`, файл проекта внутри — `Calabonga.Commandex.Engine.Processors.csproj`. `AssemblyName`/`RootNamespace` MSBuild берёт из имени `.csproj`, поэтому сборка, `PackageId` и namespace корректны и консистентны (`Calabonga.Commandex.Engine.Processors`), `.sln` и CI (ссылаются на `*.sln`) не ломаются. Это только навигационное неудобство: имя папки намекает на несуществующий namespace `Calabonga.Commandex.Processors`. Чистится переименованием папки + правкой одного пути в `.sln`.
-
-Исправлено в ходе ревизии: удалён дубль `Extensions/ProcessorResult.cs`; `AdvancedResultProcessor`, `Processor`, `ClipboardResult` помечены `sealed`; `Processor` логирует исход каждой обработки; `TextFileResult` сохраняет явное расширение файла.

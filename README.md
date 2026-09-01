@@ -24,6 +24,10 @@ It's a complex solution with a few repositories:
 
 ### 5.0.0 2026-06-19
 
+Built against `Calabonga.Commandex.Engine` 5.0.0.
+
+Engine-side:
+
 * `IDialogWindow` abstraction added in `Calabonga.Commandex.Engine` nuget for dialog window customization. If you need to use custom window dialog, you should create windows, for example, `CustomDialogWindow` and register it in dependency container.
 
   ```csharp
@@ -31,8 +35,13 @@ It's a complex solution with a few repositories:
    services.AddScoped<IDialogWindow, CustomDialogWindow>();
   ```
 
-
 * Nuget-packages dependencies were updated
+
+Processors-side:
+
+* `Processor` now logs the outcome of every result handling (file saved to path / save canceled by user / text copied to clipboard). Requires `ILogger<Processor>` from the DI container (already available wherever `AddAdvancedResultProcessor()` is used).
+* `TextFileResult` keeps an explicit file extension instead of always forcing `.txt`: `report.csv` stays `report.csv`, a name without extension still gets `.txt` appended. The `SaveFileDialog` filter in `Processor` becomes meaningful for non-txt payloads.
+* `AdvancedResultProcessor`, `Processor` and `ClipboardResult` marked `sealed`; duplicate `ProcessorResult` type removed from `Extensions` namespace (the one in `Base` is the single source).
 
 ### v4.0.0 2025-12-05
 

@@ -5,7 +5,7 @@ namespace Calabonga.Commandex.Engine.Processors.Results;
 /// <summary>
 /// Clipboard Result command processor. Cope data to windows clipboard.
 /// </summary>
-public class ClipboardResult : ProcessorResult
+public sealed class ClipboardResult : ProcessorResult
 {
     /// <summary>
     /// String data to store into clipboard
