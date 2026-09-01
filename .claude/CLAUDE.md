@@ -47,6 +47,10 @@ dotnet build src/Calabonga.Commandex.Engine.Processors.sln -c Release
 
 При подъёме версии в одном релизном цикле правь синхронно: `<Version>`, `<PackageReference Include="Calabonga.Commandex.Engine" Version="...">`, `<PackageReleaseNotes>` и раздел «History of changes» в `README.md` (он пакуется в пакет как `PackageReadmeFile`).
 
+### Соглашение о release notes
+
+Processors — вторичная (Framework) сборка: её классы расширяют контракты Engine (`IResultProcessor`, `JsonSerializerOptionsExt` и т. п.), а `<Version>` и `PackageReference` на Engine в одном релизном цикле всегда равны версии Engine. Поэтому многие релизы Processors по сути только «подтягивают» Engine. `<PackageReleaseNotes>` и запись в `README.md` должны явно называть версию Engine, против которой собрано (напр. «Built against Calabonga.Commandex.Engine 5.0.0 …»), и перечислять собственные изменения пакета — либо явно отмечать, что их нет.
+
 ## Архитектура
 
 ### AdvancedResultProcessor
@@ -61,11 +65,11 @@ dotnet build src/Calabonga.Commandex.Engine.Processors.sln -c Release
 ### Visitor для типизированных результатов
 
 - `IProcessorResult` — маркер с `Accept(IProcessor)`. Абстрактный базовый класс `ProcessorResult` (в `Base/`).
-- `IProcessor` — «посетитель» с перегрузками `Visit(TextFileResult)` и `Visit(ClipboardResult)`. Реализация `Processor`:
-  - `Visit(TextFileResult)` — `SaveFileDialog` (стартовая папка — рабочий стол, фильтр по расширению файла) и `File.WriteAllText`.
-  - `Visit(ClipboardResult)` — `Clipboard.SetText`.
-- Готовые результаты (в `Results/`):
-  - `TextFileResult(string fileName, string text)` — `sealed`; к `fileName` дописывается `.txt`, если расширения нет.
+- `IProcessor` — «посетитель» с перегрузками `Visit(TextFileResult)` и `Visit(ClipboardResult)`. `sealed`-реализация `Processor` (DI-зависимость `ILogger<Processor>`):
+  - `Visit(TextFileResult)` — `SaveFileDialog` (стартовая папка — рабочий стол, фильтр по расширению файла) и `File.WriteAllText`; итог (сохранено в путь / отменено пользователем) пишется в лог. Возвращает `void` — вызывающий `AdvancedResultProcessor` результат обработки не получает по контракту.
+  - `Visit(ClipboardResult)` — `Clipboard.SetText`, факт копирования логируется.
+- Готовые результаты (в `Results/`), оба `sealed`:
+  - `TextFileResult(string fileName, string text)` — `.txt` дописывается только если у `fileName` нет расширения; явное расширение (`.csv`, `.json`, `.sql`, …) сохраняется.
   - `ClipboardResult(string clipboardData)`.
 
 Добавить новый вид результата = новый класс `: ProcessorResult` в `Results/` + перегрузка `Visit(...)` в `IProcessor` и `Processor`. Это меняет публичный контракт `IProcessor` — соответствует подъёму версии всего Framework.
@@ -83,8 +87,6 @@ source.TryAddScoped<IResultProcessor, AdvancedResultProcessor>();
 
 ## Известные проблемы
 
-- **Дубль класса `ProcessorResult`.** `Extensions/ProcessorResult.cs` (namespace `...Processors.Extensions`) — побайтовая копия `Base/ProcessorResult.cs` (namespace `...Processors.Base`). Реально используется только вариант из `Base/`; файл в `Extensions/` — мёртвый код, лежит не в своей папке. Кандидат на удаление.
-- Классы `AdvancedResultProcessor`, `Processor`, `ClipboardResult` не `sealed` — расходится с `code-styles.md` («sealed по умолчанию»). `TextFileResult` помечен `sealed`.
-- `Processor.Visit(...)` не возвращает признак успеха/отмены (отмена `SaveFileDialog` проходит молча) и не логируется — вызывающий `AdvancedResultProcessor` не знает, была ли обработка фактически выполнена.
-- `TextFileResult` жёстко приводит имя к `.txt`, но фильтр `SaveFileDialog` строится из `Path.GetExtension` — фактически всегда `*.txt`.
-- `PackageReleaseNotes` в `.csproj` и запись `5.0.0` в `README.md` описывают изменение из Engine (`IDialogWindow`), а не самого пакета Processors — исторически release notes здесь в основном фиксируют подъём зависимости на Engine.
+- **Имя папки проекта ≠ имя проекта.** Папка на диске — `src/Calabonga.Commandex.Processors/`, файл проекта внутри — `Calabonga.Commandex.Engine.Processors.csproj`. `AssemblyName`/`RootNamespace` MSBuild берёт из имени `.csproj`, поэтому сборка, `PackageId` и namespace корректны и консистентны (`Calabonga.Commandex.Engine.Processors`), `.sln` и CI (ссылаются на `*.sln`) не ломаются. Это только навигационное неудобство: имя папки намекает на несуществующий namespace `Calabonga.Commandex.Processors`. Чистится переименованием папки + правкой одного пути в `.sln`.
+
+Исправлено в ходе ревизии: удалён дубль `Extensions/ProcessorResult.cs`; `AdvancedResultProcessor`, `Processor`, `ClipboardResult` помечены `sealed`; `Processor` логирует исход каждой обработки; `TextFileResult` сохраняет явное расширение файла.
