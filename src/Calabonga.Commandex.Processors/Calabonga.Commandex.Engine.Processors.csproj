@@ -13,7 +13,7 @@
 		<Description>Results Processors for Calabonga.Commandex commands execution results. This is an extended version of the just show string in the notification dialog.</Description>
 		<Copyright>Calabonga SOFT © 2024 - $([System.DateTime]::Now.ToString(yyyy))</Copyright>
 		<PackageTags>commandex;calabonga;wpf;definitions;engine;core;plugins;mvvm;communitytoolkit;processors</PackageTags>
-		<PackageReleaseNotes>IDialogWindow abstraction added for dialog window customization.</PackageReleaseNotes>
+		<PackageReleaseNotes>Built against Calabonga.Commandex.Engine 5.0.0 (adds IDialogWindow abstraction for dialog window customization). Processors: Processor now logs each result handling; TextFileResult keeps an explicit file extension instead of always forcing .txt.</PackageReleaseNotes>
 		<PackageProjectUrl>https://github.com/Calabonga/Calabonga.Commandex.Engine.Processors</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Calabonga/Calabonga.Commandex.Engine.Processors</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>

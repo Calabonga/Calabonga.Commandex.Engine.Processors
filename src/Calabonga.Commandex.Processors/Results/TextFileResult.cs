@@ -1,4 +1,5 @@
 ﻿using Calabonga.Commandex.Engine.Processors.Base;
+using System.IO;
 
 namespace Calabonga.Commandex.Engine.Processors.Results;
 
@@ -9,12 +10,14 @@ public sealed class TextFileResult : ProcessorResult
 {
     public TextFileResult(string fileName, string text)
     {
-        FileName = fileName.EndsWith(".txt") ? fileName : $"{fileName}.txt";
+        FileName = Path.HasExtension(fileName) ? fileName : $"{fileName}.txt";
         Text = text;
     }
 
     /// <summary>
     /// Default filename for saving file. User can change it on saving.
+    /// When <paramref name="fileName"/> has no extension, <c>.txt</c> is appended;
+    /// an explicit extension (<c>.csv</c>, <c>.json</c>, <c>.sql</c>, …) is kept as is.
     /// </summary>
     public string FileName { get; }
 
