@@ -22,6 +22,12 @@ It's a complex solution with a few repositories:
  
 ## History of changes
 
+### 5.0.1 2026-09-02
+
+Built against `Calabonga.Commandex.Engine` 5.0.1 (fallback brushes `AppBackgroundBrush` / `TextSecondaryBrush` added to Engine's `Generic.xaml` so `DialogWindow` renders without host resource overrides).
+
+No Processors-side changes.
+
 ### 5.0.0 2026-06-19
 
 Built against `Calabonga.Commandex.Engine` 5.0.0.
